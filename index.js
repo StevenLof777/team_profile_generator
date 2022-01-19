@@ -9,60 +9,39 @@ const promptUser = () => {
       type: 'input',
       name: 'name',
       message: 'What is your name?',
-    },
-    {
-      type: 'input',
-      name: 'location',
-      message: 'Where are you from?',
-    },
-    {
-      type: 'input',
-      name: 'hobby',
-      message: 'What is your favorite hobby?',
-    },
-    {
-      type: 'input',
-      name: 'food',
-      message: 'What is your favorite food?',
-    },
-    {
-      type: 'input',
-      name: 'github',
-      message: 'Enter your GitHub Username',
-    },
-    {
-      type: 'input',
-      name: 'linkedin',
-      message: 'Enter your LinkedIn URL.',
-    },
+    }
   ]);
 };
 
-const generateHTML = ({ name, location, github, linkedin }) =>
+const generateHTML = ({ employee, engineer, intern, manager }) =>
   `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <title>Document</title>
-</head>
-<body>
-  <div class="jumbotron jumbotron-fluid">
-  <div class="container">
-    <h1 class="display-4">Hi! My name is ${name}</h1>
-    <p class="lead">I am from ${location}.</p>
-    <h3>Example heading <span class="badge badge-secondary">Contact Me</span></h3>
-    <ul class="list-group">
-      <li class="list-group-item">My GitHub username is ${github}</li>
-      <li class="list-group-item">LinkedIn: ${linkedin}</li>
-    </ul>
-  </div>
-</div>
-</body>
-</html>`;
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="./styles-reset-demo.css">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+      <script src="https://kit.fontawesome.com/ddeafb3003.js" crossorigin="anonymous"></script>
+      <link rel="stylesheet" href="./styles-demo.css">
+      <title>Demo</title>
+  </head>
+  <body>
+      <header class="my-header">
+          <h1 class="title">My Team</h1>    
+      </header>
+  
+      <div class="container card-container">
+          <div class="row card-row justify-content-md-center">
+          
 
-// Bonus using writeFileSync as a promise
+
+          </div>
+      </div>
+  </body>
+  </html>`;
+
+// Using writeFileSync as a promise
 const init = () => {
   promptUser()
     // Use writeFileSync method to use promises instead of a callback function

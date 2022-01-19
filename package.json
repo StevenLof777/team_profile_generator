@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/StevenLof777/team_profile_generator/issues"
   },
-  "homepage": "https://github.com/StevenLof777/team_profile_generator#readme"
+  "homepage": "https://github.com/StevenLof777/team_profile_generator#readme",
+  "dependencies": {
+    "inquirer": "^8.2.0"
+  }
 }
