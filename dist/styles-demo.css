@@ -1,0 +1,58 @@
+.my-header {
+    background-color: rgb(255, 83, 112);
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+.title{
+    text-align: center;
+    color: white;
+}
+
+/* Employee Information */
+.employee-card{
+    margin: 1rem;
+    --bs-gutter-x: 0rem;
+    box-shadow: 5px 5px 5px #888888;
+    border-radius: 0.3rem;
+    border: none;
+    max-width: 18rem;
+    border-radius: 0rem 0rem .3rem .3rem;
+
+}
+
+.employee-header{
+    background-color: rgb(40, 140, 255);
+    width: 100%;
+    border-radius: 0.3rem 0.3rem 0rem 0rem;
+}
+
+.employee-name {
+    color: white;
+    margin: 1rem 0rem .5rem 1rem;
+}
+
+.job-title {
+    color: white;
+    margin: 0rem 0rem .5rem 1rem;
+    padding-bottom: .5rem;
+}
+
+.employee-card-body {
+    background-color: rgb(240, 238, 238);
+    padding: 1rem;
+    border-radius: 0rem 0rem .3rem .3rem;
+}
+
+.employee-details{
+
+    padding: 0rem;
+    background-color: rgb(240, 238, 238);
+}
+
+.detail-text{
+    margin: 2px;
+    padding: 10px;
+    background-color: white;
+}
+
