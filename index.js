@@ -1,8 +1,7 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 
-// Use writeFileSync method to use promises instead of a callback function
-
+// Use writeFileSync method to use promises
 const promptUser = () => {
   return inquirer.prompt([
     {
@@ -33,7 +32,7 @@ const generateHTML = ({ employee, engineer, intern, manager }) =>
   
       <div class="container card-container">
           <div class="row card-row justify-content-md-center">
-          
+             
 
 
           </div>
