@@ -18,7 +18,7 @@ describe("Manager", () => {
         });
 
       it("Should throw an error if the getRole method doesn't return 'Manager'.", () => {
-        const cb = () => new Manager().getGitHub('GitHub', 'Manager');
+        const cb = () => new Manager().getRole('role', 'Manager');
         const err = new Error("Expected to return 'Manager'.");
         expect(cb).toThrowError(err);
         });  
