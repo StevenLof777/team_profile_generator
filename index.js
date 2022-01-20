@@ -2,17 +2,8 @@ const inquirer = require('inquirer');
 const fs = require('fs');
 
 // Use writeFileSync method to use promises
-const promptUser = () => {
-  return inquirer.prompt([
-    {
-      type: 'input',
-      name: 'name',
-      message: 'What is your name?',
-    }
-  ]);
-};
 
-const generateHTML = ({ employee, engineer, intern, manager }) =>
+const generateHTML = ({employee}) =>
   `<!DOCTYPE html>
   <html lang="en">
   <head>
@@ -32,21 +23,63 @@ const generateHTML = ({ employee, engineer, intern, manager }) =>
   
       <div class="container card-container">
           <div class="row card-row justify-content-md-center">
-             
-
-
+          ${employee}   
           </div>
       </div>
   </body>
   </html>`;
-
-// Using writeFileSync as a promise
-const init = () => {
-  promptUser()
-    // Use writeFileSync method to use promises instead of a callback function
-    .then((answers) => fs.writeFileSync('index.html', generateHTML(answers)))
-    .then(() => console.log('Successfully wrote to index.html'))
-    .catch((err) => console.error(err));
-};
-
-init();
+  inquirer.prompt([
+    {
+    type: 'input',
+    name: 'name',
+    message: "What is the employee's name?",
+    },
+    {
+    type: 'input',
+    name: 'id',
+    message: "What is the employee's name?",
+    },
+    {
+    type: "input",
+    name: "email",
+    message: "What is the employee's email?",
+    },
+    // Engineer
+    {
+    type: "confirm",
+    name: "engineer",
+    message: "Is the employee an engineer?",
+    },
+    {
+    type: "input",
+    name: "github",
+    message: "What is the engineer's GitHub user name?",
+    },
+    // Intern
+    {
+    type: "confirm",
+    name: "intern",
+    message: "Is the employee and Intern?",
+    },
+    {
+    type: "input",
+    name: "school",
+    message: "What school does the intern go too?",
+    },
+    // Manager
+    {
+    type: "confirm",
+    name: "manager",
+    message: "Is the employee an manager?",
+    },
+    {
+    type: "input",
+    name: "officeNumber",
+    message: "What is the office number for the manager?",
+    },
+  ]).then((answers) => {
+    const READMEContent = generateHTML(answers);
+    fs.appendFile('html.md', READMEContent, (err) =>
+    err ? console.error(err) : console.log('index.html generated.')
+    );
+});
