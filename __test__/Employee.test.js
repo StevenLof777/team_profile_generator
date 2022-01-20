@@ -44,7 +44,7 @@ describe("Employee", () => {
             expect(cb).toThrowError(err);
             }); 
       });
-    // getId method should check to see if the input is a number.
+    // getEmail method should check to see if the input is a number.
     // Use string.indexOf('@') when making getEmail method.
     describe("getEmail", () => {
         it("Should have an @ inside the string.", () => {
@@ -65,4 +65,21 @@ describe("Employee", () => {
             expect(cb).toThrowError(err);
             }); 
       });
+
+    // getRole method should check to see if the input is a number.
+    // Use a conditional when making getRole method.
+    describe("getRole", () => {
+        it("Should return 'Employee'.", () => {
+            const role = 'Employee';
+            const result = new Employee().getRole('role', role);
+            expect(result).toEqual(role);
+            });
+
+        it("Should throw an error if the getRole method doesn't return 'Employee'.", () => {
+            const cb = () => new Employee().getRole('role');
+            const err = new Error('Expected to return "Employee".')
+            expect(cb).toThrow(err);
+            });
+        });
 });
+
