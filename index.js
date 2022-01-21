@@ -7,7 +7,7 @@ const fs = require('fs');
 
 // Use writeFileSync method to use promises
 
-const generateHTML = ({employee}) =>
+const generateHTML = ({employee}) => {
   `<!DOCTYPE html>
   <html lang="en">
   <head>
@@ -53,13 +53,21 @@ const generateHTML = ({employee}) =>
     choices: ['Engineer', 'Manager', 'Intern'], 
     name: 'role',
     message: 'Which role does this employee have?'
-    },
+    }]).then((answers) => {
+      const htmlContent = generateHTML(answers);
+      fs.appendFile('index.html', htmlContent, (err) =>
+      err ? console.error(err) : console.log('index.html generated.')
+    });
+
+
     // Asks if there are any more employees the user wants to add
+    inquirer.prompt([
     {
       type: "confirm",
       name: "moreRoles",
       message: "Are there anymore roles you would like to add?",
       },
+      
     // Engineer
     {
     type: "confirm",
@@ -98,4 +106,4 @@ const generateHTML = ({employee}) =>
     fs.appendFile('index.html', htmlContent, (err) =>
     err ? console.error(err) : console.log('index.html generated.')
     );
-});
+    })};
