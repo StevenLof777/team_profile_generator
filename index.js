@@ -1,3 +1,7 @@
+const Employee = require('./lib/employee');
+const Engineer = require('./lib/engineer');
+const Intern = require('./lib/intern');
+const Manager = require('./lib/manager');
 const inquirer = require('inquirer');
 const fs = require('fs');
 
@@ -37,13 +41,25 @@ const generateHTML = ({employee}) =>
     {
     type: 'input',
     name: 'id',
-    message: "What is the employee's name?",
+    message: "What is the employee's id?"
     },
     {
     type: "input",
     name: "email",
     message: "What is the employee's email?",
     },
+    {
+    type: 'list',
+    choices: ['Engineer', 'Manager', 'Intern'], 
+    name: 'role',
+    message: 'Which role does this employee have?'
+    },
+    // Asks if there are any more employees the user wants to add
+    {
+      type: "confirm",
+      name: "moreRoles",
+      message: "Are there anymore roles you would like to add?",
+      },
     // Engineer
     {
     type: "confirm",
@@ -78,8 +94,8 @@ const generateHTML = ({employee}) =>
     message: "What is the office number for the manager?",
     },
   ]).then((answers) => {
-    const READMEContent = generateHTML(answers);
-    fs.appendFile('html.md', READMEContent, (err) =>
+    const htmlContent = generateHTML(answers);
+    fs.appendFile('index.html', htmlContent, (err) =>
     err ? console.error(err) : console.log('index.html generated.')
     );
 });
