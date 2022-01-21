@@ -5,9 +5,16 @@ const Manager = require('./lib/manager');
 const inquirer = require('inquirer');
 const fs = require('fs');
 
-// Use writeFileSync method to use promises
+let employeesArr = [];
 
-const generateHTML = ({employee}) => {
+// Make a array of employees
+// Loop through the array and for each employee make an card
+
+// Make a function called generateTeam
+// Use .join 
+
+// This should be the return
+const generateHTML = ({employees}) => {
   `<!DOCTYPE html>
   <html lang="en">
   <head>
@@ -27,12 +34,22 @@ const generateHTML = ({employee}) => {
   
       <div class="container card-container">
           <div class="row card-row justify-content-md-center">
-          ${employee}   
+          ${employees()}   
           </div>
       </div>
   </body>
   </html>`;
+};
+
+// Break up prompts into separate functions
+const findRole = () => {
   inquirer.prompt([
+    {
+    type: 'list',
+    choices: ['Engineer', 'Manager', 'Intern'], 
+    name: 'role',
+    message: 'Which role does this employee have?'
+    },
     {
     type: 'input',
     name: 'name',
@@ -47,63 +64,98 @@ const generateHTML = ({employee}) => {
     type: "input",
     name: "email",
     message: "What is the employee's email?",
-    },
-    {
-    type: 'list',
-    choices: ['Engineer', 'Manager', 'Intern'], 
-    name: 'role',
-    message: 'Which role does this employee have?'
-    }]).then((answers) => {
-      const htmlContent = generateHTML(answers);
-      fs.appendFile('index.html', htmlContent, (err) =>
-      err ? console.error(err) : console.log('index.html generated.')
-    });
+    }
+  ]).then((answers) => {
+    // removed .role
+    switch(answers.role) {
+      case 'Engineer':
+        engineer();
+        break;
+      case 'Intern':
+        intern();
+      default:
+        manager();
+    }
+  })
+}
 
+findRole()
 
-    // Asks if there are any more employees the user wants to add
-    inquirer.prompt([
-    {
-      type: "confirm",
-      name: "moreRoles",
-      message: "Are there anymore roles you would like to add?",
-      },
-      
-    // Engineer
-    {
-    type: "confirm",
-    name: "engineer",
-    message: "Is the employee an engineer?",
-    },
+const engineer = () => {
+  inquirer.prompt([
     {
     type: "input",
     name: "github",
     message: "What is the engineer's GitHub user name?",
     },
-    // Intern
     {
-    type: "confirm",
-    name: "intern",
-    message: "Is the employee and Intern?",
-    },
+    type: "list",
+    choices: ['Yes', 'No'],
+    name: "moreRoles",
+    message: "Are there anymore roles you would like to add?",
+    }    
+  ]).then((answers) => {
+    switch(answers.moreRoles) {
+      case 'Yes':
+        findRole()
+        break;
+      case 'No':
+      default:
+        // generateHTML();
+        console.log('Generate HTML')
+    }
+  })
+}
+
+const intern = () => {
+  inquirer.prompt([
     {
     type: "input",
     name: "school",
-    message: "What school does the intern go too?",
+    message: "What is school is the intern attending?"
     },
-    // Manager
     {
-    type: "confirm",
-    name: "manager",
-    message: "Is the employee an manager?",
-    },
+    type: "list",
+    choices: ['Yes', 'No'],
+    name: "moreRoles",
+    message: "Are there anymore roles you would like to add?"
+    }
+      
+  ]).then((answers) => {
+    switch(answers.moreRoles) {
+      case 'Yes':
+        findRole()
+        break;
+      case 'No':
+      default:
+        // generateHTML();
+        console.log('Generate HTML')
+    }
+  })
+}
+
+const manager = () => {
+  inquirer.prompt([
     {
     type: "input",
     name: "officeNumber",
-    message: "What is the office number for the manager?",
+    message: "What is the manager's office number?"
     },
+    {
+    type: "list",
+    choices: ['Yes', 'No'],
+    name: "moreRoles",
+    message: "Are there anymore roles you would like to add?"
+    }  
   ]).then((answers) => {
-    const htmlContent = generateHTML(answers);
-    fs.appendFile('index.html', htmlContent, (err) =>
-    err ? console.error(err) : console.log('index.html generated.')
-    );
-    })};
+    switch(answers.moreRoles) {
+      case 'Yes':
+        findRole()
+        break;
+      case 'No':
+      default:
+        // generateHTML();
+        console.log('Generate HTML')
+    }
+  })
+};
