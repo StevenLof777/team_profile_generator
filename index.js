@@ -7,40 +7,6 @@ const fs = require('fs');
 
 let employeesArr = [];
 
-// Make a array of employees
-// Loop through the array and for each employee make an card
-
-// Make a function called generateTeam
-// Use .join 
-
-// This should be the return
-const generateHTML = ({employees}) => {
-  `<!DOCTYPE html>
-  <html lang="en">
-  <head>
-      <meta charset="UTF-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel="stylesheet" href="./styles-reset-demo.css">
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-      <script src="https://kit.fontawesome.com/ddeafb3003.js" crossorigin="anonymous"></script>
-      <link rel="stylesheet" href="./styles-demo.css">
-      <title>Demo</title>
-  </head>
-  <body>
-      <header class="my-header">
-          <h1 class="title">My Team</h1>    
-      </header>
-  
-      <div class="container card-container">
-          <div class="row card-row justify-content-md-center">
-          ${employees()}   
-          </div>
-      </div>
-  </body>
-  </html>`;
-};
-
 // Break up prompts into separate functions
 const findRole = () => {
   inquirer.prompt([
@@ -67,6 +33,7 @@ const findRole = () => {
     }
   ]).then((answers) => {
     // removed .role
+    console.log(answers)
     switch(answers.role) {
       case 'Engineer':
         engineer();
@@ -95,6 +62,9 @@ const engineer = () => {
     message: "Are there anymore roles you would like to add?",
     }    
   ]).then((answers) => {
+    console.log(answers);
+    const word = employeesArr.push.answers;
+    console.log(word);
     switch(answers.moreRoles) {
       case 'Yes':
         findRole()
@@ -158,4 +128,39 @@ const manager = () => {
         console.log('Generate HTML')
     }
   })
+};
+
+// Make a array of employees
+// Loop through the array and for each employee make an card
+
+// Make a function called generateTeam
+// Use .join 
+
+// This should be the return
+const generateHTML = ({employees}) => {
+
+  `<!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="./styles-reset-demo.css">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+      <script src="https://kit.fontawesome.com/ddeafb3003.js" crossorigin="anonymous"></script>
+      <link rel="stylesheet" href="./styles-demo.css">
+      <title>Demo</title>
+  </head>
+  <body>
+      <header class="my-header">
+          <h1 class="title">My Team</h1>    
+      </header>
+  
+      <div class="container card-container">
+          <div class="row card-row justify-content-md-center">
+          ${employees()}   
+          </div>
+      </div>
+  </body>
+  </html>`;
 };
