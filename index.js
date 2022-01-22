@@ -72,24 +72,48 @@ const engineer = () => {
   })
 }
 
-let HTML = [`HTML`, `CardZone`, ]
+let HTML = [`HTML`, `CardZone` ]
 
-const card = (name) => {
+const card = (name, id) => {
   const eName = `Employee Name: ${name}`;
-  employeesArr.push(eName);
+  const eId = `Employee ID: ${id}`;
+  HTML.push(eName, eId);
   console.log(HTML);
 };
 
 const team = () => {
     for (let i = 0; i < employeesArr.length; i++) {
       console.log(employeesArr[i].getName()); 
-      const stupidName = employeesArr[i].getName();
-      console.log(stupidName) 
-      card(stupidName);
+      card(
+        employeesArr[i].getName(),
+        employeesArr[i].getId()
+      );
   }
 }
 
 findRole();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // const intern = () => {
 //   inquirer.prompt([
