@@ -67,26 +67,43 @@ const engineer = () => {
         break;
       case 'No':
       default:
-        team()
+        makeECard()
     }
   })
 }
 
 let HTML = [`HTML`, `CardZone` ]
 
-const card = (name, id) => {
-  const eName = `Employee Name: ${name}`;
-  const eId = `Employee ID: ${id}`;
-  HTML.push(eName, eId);
+const eCard = (name, id, email, gitHub, role) => {
+  eDetails =
+  `
+    <div class="card employee-card">
+    <div class="employee-header">
+        <h5 class="card-title employee-name">${name}</h5>
+        <h5 class="card-title job-title"><i class="fas fa-mug-hot my-icons"></i>${role}</h5>
+    </div>
+        <div class="card-body employee-card-body">
+            <div class="employee-details container">
+                <p class="card-text detail-text employee-id">ID: ${id}</p>
+                <p class="card-text detail-text employee-email">Email: ${email}</p>
+                <p class="card-text detail-text employee-github">GitHub: ${gitHub}</p>
+            </div>
+        </div>
+    </div>
+  `
+  HTML.push(eDetails.trim());
   console.log(HTML);
 };
 
-const team = () => {
+const makeECard = () => {
     for (let i = 0; i < employeesArr.length; i++) {
       console.log(employeesArr[i].getName()); 
-      card(
+      eCard(
         employeesArr[i].getName(),
-        employeesArr[i].getId()
+        employeesArr[i].getId(),
+        employeesArr[i].getEmail(),
+        employeesArr[i].getGitHub(),
+        employeesArr[i].getRole()
       );
   }
 }
