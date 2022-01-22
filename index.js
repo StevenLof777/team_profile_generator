@@ -51,7 +51,7 @@ const engineer = () => {
     },
     {
     type: "input",
-    name: "github",
+    name: "gitHub",
     message: "What is the engineer's GitHub user name?",
     },
     {
@@ -63,7 +63,7 @@ const engineer = () => {
     ]).then((answers) => {
     const engineer = new Engineer(answers.name, answers.id, answers.email, answers.gitHub)
     employeesArr.push(engineer)
-    console.log(employeesArr)  
+    console.log(engineer.getName())
     switch(answers.moreRoles) {
       case 'Yes':
         findRole()
@@ -136,25 +136,33 @@ const engineer = () => {
 
 // This should be the return
 
+const generateTeam = () => {
+  console.log(employeesArr)
+}
+
+
 const generateHTML = () => {
+
+
+
   const engineerCard = () => {
     const eCard =
-    // `
-    //   <div class="card employee-card">
-    //   <div class="employee-header">
-    //       <h5 class="card-title employee-name">${engineer.getName()}</h5>
-    //       <h5 class="card-title job-title"><i class="fas fa-mug-hot my-icons"></i>${engineer.getRole()}</h5>
-    //   </div>
-    //       <div class="card-body employee-card-body">
-    //           <div class="employee-details container">
-    //               <p class="card-text detail-text employee-id">ID: ${engineer.getId()}</p>
-    //               <p class="card-text detail-text employee-email">Email: ${engineer.getEmail()}</p>
-    //               <p class="card-text detail-text employee-github">GitHub: ${engineer.getGitHub()}</p>
-    //               <p class="card-text detail-text employee-office-num">Office Number: ${engineer.getId()}</p>
-    //           </div>
-    //       </div>
-    // </div>
-    //   `
+    `
+      <div class="card employee-card">
+      <div class="employee-header">
+          <h5 class="card-title employee-name">${engineer.getName()}</h5>
+          <h5 class="card-title job-title"><i class="fas fa-mug-hot my-icons"></i>${engineer.getRole()}</h5>
+      </div>
+          <div class="card-body employee-card-body">
+              <div class="employee-details container">
+                  <p class="card-text detail-text employee-id">ID: ${engineer.getId()}</p>
+                  <p class="card-text detail-text employee-email">Email: ${engineer.getEmail()}</p>
+                  <p class="card-text detail-text employee-github">GitHub: ${engineer.getGitHub()}</p>
+                  <p class="card-text detail-text employee-office-num">Office Number: ${engineer.getId()}</p>
+              </div>
+          </div>
+    </div>
+      `
     `
       <div class="card employee-card">
       <div class="employee-header">
