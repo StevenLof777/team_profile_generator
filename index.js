@@ -51,7 +51,7 @@ const engineer = () => {
     },
     {
     type: "input",
-    name: "github",
+    name: "gitHub",
     message: "What is the engineer's GitHub user name?",
     },
     {
@@ -137,73 +137,61 @@ const engineer = () => {
 // This should be the return
 
 const generateHTML = () => {
-  const engineerCard = () => {
-    const eCard =
-    // `
-    //   <div class="card employee-card">
-    //   <div class="employee-header">
-    //       <h5 class="card-title employee-name">${engineer.getName()}</h5>
-    //       <h5 class="card-title job-title"><i class="fas fa-mug-hot my-icons"></i>${engineer.getRole()}</h5>
-    //   </div>
-    //       <div class="card-body employee-card-body">
-    //           <div class="employee-details container">
-    //               <p class="card-text detail-text employee-id">ID: ${engineer.getId()}</p>
-    //               <p class="card-text detail-text employee-email">Email: ${engineer.getEmail()}</p>
-    //               <p class="card-text detail-text employee-github">GitHub: ${engineer.getGitHub()}</p>
-    //               <p class="card-text detail-text employee-office-num">Office Number: ${engineer.getId()}</p>
-    //           </div>
-    //       </div>
-    // </div>
-    //   `
-    `
-      <div class="card employee-card">
-      <div class="employee-header">
-          <h5 class="card-title employee-name">${employeesArr[0].getName()}</h5>
-          <h5 class="card-title job-title"><i class="fas fa-mug-hot my-icons"></i></h5>
-      </div>
-          <div class="card-body employee-card-body">
-              <div class="employee-details container">
-                  <p class="card-text detail-text employee-id">ID: </p>
-                  <p class="card-text detail-text employee-email">Email: </p>
-                  <p class="card-text detail-text employee-github">GitHub: </p>
-                  <p class="card-text detail-text employee-office-num">Office Number: </p>
+  const makeCards = () =>{ 
+    for(let i = 0; i < employeesArr.length; i++){
+      const engineerCard = () => {
+        const eCard =
+        `
+          <div class="card employee-card">
+          <div class="employee-header">
+              <h5 class="card-title employee-name">${employeesArr[i].getName()}</h5>
+              <h5 class="card-title job-title"><i class="fas fa-mug-hot my-icons"></i>${employeesArr[i].getRole()}</h5>
+          </div>
+              <div class="card-body employee-card-body">
+                  <div class="employee-details container">
+                      <p class="card-text detail-text employee-id">ID: ${employeesArr[i].getId()}</p>
+                      <p class="card-text detail-text employee-email">Email: ${employeesArr[i].getEmail()}</p>
+                      <p class="card-text detail-text employee-github">GitHub: ${employeesArr[i].getGitHub()}</p>
+                  </div>
               </div>
-          </div>
-    </div>
-      `
-      return eCard
-}
-
-  const markup = `<!DOCTYPE html>
-  <html lang="en">
-  <head>
-      <meta charset="UTF-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel="stylesheet" href="src/styles-reset-demo.css">
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-      <script src="https://kit.fontawesome.com/ddeafb3003.js" crossorigin="anonymous"></script>
-      <link rel="stylesheet" href="src/styles-demo.css">
-      <title>Demo</title>
-  </head>
-  <body>
-      <header class="my-header">
-          <h1 class="title">My Team</h1>    
-      </header>
-  
-      <div class="container card-container">
-          <div class="row card-row justify-content-md-center">
-            ${engineerCard()}
-          </div>
-      </div>
-  </body>
-  </html>`;
-  
-  return markup
+        </div>
+          `
+          return eCard
+      }
+      engineerCard()
+    }
+    const markUp = `<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles-reset-demo.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <script src="https://kit.fontawesome.com/ddeafb3003.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="styles-demo.css">
+        <title>Demo</title>
+    </head>
+    <body>
+        <header class="my-header">
+            <h1 class="title">My Team</h1>    
+        </header>
+    
+        <div class="container card-container">
+            <div class="row card-row justify-content-md-center">
+              ${makeCards()}
+            </div>
+        </div>
+    </body>
+    </html>`;
+    
+    return markup
+    
+  }  
 };
 
 const init = () => {
   console.log('init works')
-  fs.writeFileSync('index.html', generateHTML());
+  fs.writeFileSync('src/index.html', generateHTML());
 };
 
