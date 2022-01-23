@@ -1,3 +1,12 @@
+// Separate Out the switch cases from the employee functions 
+
+// To summarize the issue, you are having several objects  ( in fact several objectTypes) in your employeesArr.  So for some object Types such as Manager and Engineer getSchool is not a valid function, that is the what the error is complaining about
+
+// To summarize the issue, you are having several objects  ( in fact several objectTypes) in your employeesArr.  So for some object Types such as Manager and Engineer getSchool is not a valid function, that is the what the error is complaining about
+
+// One hint to do that would be to filter out those array elements in the for loop using getRole() == 'Intern' for example, similarly for Engineer and Manager
+
+
 const Employee = require('./lib/employee');
 const Engineer = require('./lib/engineer');
 const Intern = require('./lib/intern');
@@ -54,8 +63,8 @@ const manager = () => {
     message: "Would you like to add people to your team?",
     }
     ]).then((answers) => {
-    const manager = new Manager(answers.name, answers.id, answers.email, answers.officeNumber)
-    employeesArr.push(manager)
+    const manager = new Manager(answers.name, answers.id, answers.email, answers.officeNumber);
+    employeesArr.push(manager);
     switch(answers.moreRoles) {
       case 'Yes':
         findRole()
@@ -263,8 +272,8 @@ const makeECard = () => {
 // Make intern card
 const makeICard = () => {
     for (let i = 0; i < employeesArr.length; i++) {
-      console.log(employeesArr)
-      console.log(employeesArr[i]); 
+      console.log(employeesArr[i])
+      console.log(employeesArr[i].getEmail()); 
       iCard(
         employeesArr[i].getName(),
         employeesArr[i].getId(),
