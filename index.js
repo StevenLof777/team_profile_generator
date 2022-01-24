@@ -266,7 +266,7 @@ const makeECard = () => {
       engineerArr[i].getEmail(),
       // .gitHub() doesn't work, refactor later.
       // engineerArr[i].gitHub(),
-      engineerArr[i].gitHub,
+      engineerArr[i].getGitHub(),
       engineerArr[i].getRole()
     );
     console.log(engineerArr[i].gitHub)
