@@ -59,3 +59,7 @@
     padding: 10px;
     background-color: white;
 }
+
+.employee-github:hover {
+    background-color: rgb(202, 202, 202);
+}
