@@ -1,12 +1,3 @@
-// Separate Out the switch cases from the employee functions 
-
-// To summarize the issue, you are having several objects  ( in fact several objectTypes) in your employeesArr.  So for some object Types such as Manager and Engineer getSchool is not a valid function, that is the what the error is complaining about
-
-// To summarize the issue, you are having several objects  ( in fact several objectTypes) in your employeesArr.  So for some object Types such as Manager and Engineer getSchool is not a valid function, that is the what the error is complaining about
-
-// One hint to do that would be to filter out those array elements in the for loop using getRole() == 'Intern' for example, similarly for Engineer and Manager
-
-
 const Employee = require('./lib/employee');
 const Engineer = require('./lib/engineer');
 const Intern = require('./lib/intern');
@@ -21,18 +12,20 @@ let HTML = [
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href='./styles-reset-demo.css'>
+    <link rel="stylesheet" href='src/styles-reset-demo.css'>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/ddeafb3003.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="./styles-demo.css">
+    <link rel="stylesheet" href="src/styles-demo.css">
     <title>Demo</title>
 </head>
 <body>
     <header class="my-header">
         <h1 class="title">My Team</h1>    
-    </header>`
+    </header>
+    <div class="container card-container">
+        <div class="row card-row justify-content-md-center">
+`
 ]
-
 // Manager prompt
 const manager = () => {
   inquirer.prompt([
@@ -67,11 +60,12 @@ const manager = () => {
     employeesArr.push(manager);
     switch(answers.moreRoles) {
       case 'Yes':
+        makeMCard()
         findRole()
         break;
       case 'No':
       default:
-        makeMCard()
+        // console.log(employeesArr)
         generateHTML()
     }
   })
@@ -136,7 +130,6 @@ const engineer = () => {
       case 'Yes':
         findRole()
         break;
-      case 'No':
       default:
         makeECard();
         generateHTML()
@@ -195,18 +188,18 @@ const eCard = (name, id, email, gitHub, role) => {
     <div class="card employee-card">
     <div class="employee-header">
         <h5 class="card-title employee-name">${name}</h5>
-        <h5 class="card-title job-title"><i class="fas fa-mug-hot my-icons"></i>${role}</h5>
+        <h5 class="card-title job-title"><i class="fas fa-mug-hot my-icons"></i> ${role}</h5>
     </div>
         <div class="card-body employee-card-body">
             <div class="employee-details container">
                 <p class="card-text detail-text employee-id">ID: ${id}</p>
                 <p class="card-text detail-text employee-email">Email: ${email}</p>
-                <p class="card-text detail-text employee-github">GitHub: ${gitHub}</p>
+                <a href="https://github.com/${gitHub}"><p class="card-text detail-text employee-github">GitHub: ${gitHub}</p></a>
             </div>
         </div>
     </div>
   `
-  HTML.push(eDetails.trim());
+  HTML.push(eDetails);
   // console.log(HTML);
 };
 
@@ -217,7 +210,7 @@ const iCard = (name, id, email, school, role) => {
     <div class="card employee-card">
     <div class="employee-header">
         <h5 class="card-title employee-name">${name}</h5>
-        <h5 class="card-title job-title"><i class="fas fas fa-glasses my-icons"></i>${role}</h5>
+        <h5 class="card-title job-title"><i class="fas fas fa-glasses my-icons"></i> ${role}</h5>
     </div>
         <div class="card-body employee-card-body">
             <div class="employee-details container">
@@ -228,82 +221,140 @@ const iCard = (name, id, email, school, role) => {
         </div>
     </div>
   `
-  HTML.push(iDetails.trim());
+  HTML.push(iDetails);
   // console.log(HTML);
 };
 
-// Manger Card
+// Manager Card
 const mCard = (name, id, email, officeNumber, role) => {
   const mDetails =
   `
     <div class="card employee-card">
     <div class="employee-header">
         <h5 class="card-title employee-name">${name}</h5>
-        <h5 class="card-title job-title"><i class="fas fa-mug-hot my-icons"></i>${role}</h5>
+        <h5 class="card-title job-title"><i class="fas fa-mug-hot my-icons"></i> ${role}</h5>
     </div>
         <div class="card-body employee-card-body">
             <div class="employee-details container">
                 <p class="card-text detail-text employee-id">ID: ${id}</p>
                 <p class="card-text detail-text employee-email">Email: ${email}</p>
-                <p class="card-text detail-text employee-github">Office Number: ${officeNumber}</p>
+                <p class="card-text detail-text employee-officeNumber">Office Number: ${officeNumber}</p>
             </div>
         </div>
     </div>
   `
-  HTML.push(mDetails.trim());
+  HTML.push(mDetails);
   // console.log(HTML);
 };
 
+// Testing out getGitHub() on a filtered engineer
+// const filterEngineer = () => {
+//   let engineerArr = employeesArr.filter(employee => employee.getRole() === 'Engineer')
+//   for (let i = 0; i < engineerArr.length; i++) {
+
+//     console.log(engineerArr[i].gitHub)
+//   }
+// }
+
 // Make engineer card
 const makeECard = () => {
-    for (let i = 0; i < employeesArr.length; i++) {
-      console.log(employeesArr)
-      // console.log(employeesArr[i]); 
-      eCard(
-        employeesArr[i].getName(),
-        employeesArr[i].getId(),
-        employeesArr[i].getEmail(),
-        employeesArr[i].getGitHub(),
-        employeesArr[i].getRole()
-      );
+  let engineerArr = employeesArr.filter(employee => employee.getRole() === 'Engineer')
+  for (let i = 0; i < engineerArr.length; i++) {
+    eCard(
+      engineerArr[i].getName(),
+      engineerArr[i].getId(),
+      engineerArr[i].getEmail(),
+      // .gitHub() doesn't work, refactor later.
+      // engineerArr[i].gitHub(),
+      engineerArr[i].gitHub,
+      engineerArr[i].getRole()
+    );
+    console.log(engineerArr[i].gitHub)
   }
+  
+  //   for (let i = 0; i < employeesArr.length; i++) {
+  //     // console.log(employeesArr)
+  //     // console.log(employeesArr[i]); 
+  //     eCard(
+  //       employeesArr[i].getName(),
+  //       employeesArr[i].getId(),
+  //       employeesArr[i].getEmail(),
+  //       // .gitHub() doesn't work, refactor later.
+  //       // employeesArr[i].gitHub(),
+  //       employeesArr[i].gitHub,
+  //       employeesArr[i].getRole()
+  //     );
+  // }
 }
 
 // Make intern card
 const makeICard = () => {
-    for (let i = 0; i < employeesArr.length; i++) {
-      console.log(employeesArr[i])
-      console.log(employeesArr[i].getEmail()); 
-      iCard(
-        employeesArr[i].getName(),
-        employeesArr[i].getId(),
-        employeesArr[i].getEmail(),
-        employeesArr[i].getSchool(),
-        employeesArr[i].getRole()
-      );
+  let internArr = employeesArr.filter(employee => employee.getRole() === 'Intern')
+  for (let i = 0; i < internArr.length; i++) {
+    iCard(
+      internArr[i].getName(),
+      internArr[i].getId(),
+      internArr[i].getEmail(),
+      // .school() doesn't work, refactor later.
+      // internArr[i].school(),
+      internArr[i].school,
+      internArr[i].getRole()
+    );
+    console.log(internArr[i].school)
   }
+
+  //   for (let i = 0; i < employeesArr.length; i++) {
+  //     // console.log(employeesArr[i])
+  //     // console.log(employeesArr[i].getEmail()); 
+  //     iCard(
+  //       employeesArr[i].getName(),
+  //       employeesArr[i].getId(),
+  //       employeesArr[i].getEmail(),
+  //       // .getSchool() Does not work, refactor later.
+  //       // employeesArr[i].getSchool(),
+  //       employeesArr[i].school,
+  //       employeesArr[i].getRole()
+  //     );
+  // }
 }
 
 // Make manager card
 const makeMCard = () => {
-    for (let i = 0; i < employeesArr.length; i++) {
-      console.log(employeesArr)
-      // console.log(employeesArr[i].getName()); 
-      mCard(
-        employeesArr[i].getName(),
-        employeesArr[i].getId(),
-        employeesArr[i].getEmail(),
-        employeesArr[i].getOfficeNumber(),
-        employeesArr[i].getRole()
-      );
+  console.log(employeesArr)
+  let managerArr = employeesArr.filter(employee => employee.getRole() === 'Manager')
+  for (let i = 0; i < managerArr.length; i++) {
+    mCard(
+      managerArr[i].getName(),
+      managerArr[i].getId(),
+      managerArr[i].getEmail(),
+      // .officeNumber() doesn't work, refactor later.
+      // managerArr[i].officeNumber(),
+      managerArr[i].officeNumber,
+      managerArr[i].getRole()
+    );
+    console.log(managerArr[i].officeNumber)
   }
+
+  //   for (let i = 0; i < employeesArr.length; i++) {
+  //     // console.log(employeesArr)
+  //     // console.log(employeesArr[i].getName()); 
+  //     mCard(
+  //       employeesArr[i].getName(),
+  //       employeesArr[i].getId(),
+  //       employeesArr[i].getEmail(),
+  //       employeesArr[i].getOfficeNumber(),
+  //       employeesArr[i].getRole()
+  //     );
+  // }
 }
 
 // Generate HTML
 const generateHTML = () => {
   HTML.push(`
+      </div>    
+    </div>
   </body>
   </html>
   `)
-  console.log(HTML.join(``))
+  fs.writeFileSync("index.HTML", HTML.join(''))
 }
