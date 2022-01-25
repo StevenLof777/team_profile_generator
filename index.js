@@ -11,10 +11,10 @@ let HTML = [
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href='styles-reset-demo.css'>
+    <link rel="stylesheet" href='reset.css'>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/ddeafb3003.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="styles-demo.css">
+    <link rel="stylesheet" href="styles.css">
     <title>Demo</title>
 </head>
 <body>
@@ -71,6 +71,7 @@ const manager = () => {
 }
 manager();
 
+// Asks user for role
 const findRole = () => {
   inquirer.prompt([
     {
@@ -189,7 +190,7 @@ const eCard = (name, id, email, gitHub, role) => {
     <div class="card employee-card">
     <div class="employee-header">
         <h5 class="card-title employee-name">${name}</h5>
-        <h5 class="card-title job-title"><i class="fas fa-mug-hot my-icons"></i> ${role}</h5>
+        <h5 class="card-title job-title"><i class="fas fa-glasses my-icons"></i> ${role}</h5>
     </div>
         <div class="card-body employee-card-body">
             <div class="employee-details container">
@@ -256,8 +257,6 @@ const makeECard = () => {
       engineerArr[i].getName(),
       engineerArr[i].getId(),
       engineerArr[i].getEmail(),
-      // .gitHub() doesn't work, refactor later.
-      // engineerArr[i].gitHub(),
       engineerArr[i].getGitHub(),
       engineerArr[i].getRole()
     );
@@ -273,8 +272,6 @@ const makeICard = () => {
       internArr[i].getName(),
       internArr[i].getId(),
       internArr[i].getEmail(),
-      // .school() doesn't work, refactor later.
-      // internArr[i].school(),
       internArr[i].getSchool(),
       internArr[i].getRole()
     );
@@ -291,8 +288,6 @@ const makeMCard = () => {
       managerArr[i].getName(),
       managerArr[i].getId(),
       managerArr[i].getEmail(),
-      // .officeNumber() doesn't work, refactor later.
-      // managerArr[i].officeNumber(),
       managerArr[i].getOfficeNumber(),
       managerArr[i].getRole()
     );
@@ -308,5 +303,5 @@ const generateHTML = () => {
   </body>
   </html>
   `)
-  fs.writeFileSync("src/index.HTML", HTML.join(''))
+  fs.writeFileSync("dist/index.HTML", HTML.join(''))
 }
