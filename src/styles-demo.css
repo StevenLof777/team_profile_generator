@@ -60,6 +60,10 @@
     background-color: white;
 }
 
-.employee-github:hover {
+a {
+    text-decoration: none;
+}
+
+.employee-github:hover,  .employee-email:hover {
     background-color: rgb(202, 202, 202);
 }
