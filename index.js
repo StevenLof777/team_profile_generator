@@ -1,4 +1,3 @@
-const Employee = require('./lib/employee');
 const Engineer = require('./lib/engineer');
 const Intern = require('./lib/intern');
 const Manager = require('./lib/manager');
@@ -12,10 +11,10 @@ let HTML = [
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href='src/styles-reset-demo.css'>
+    <link rel="stylesheet" href='styles-reset-demo.css'>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/ddeafb3003.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="src/styles-demo.css">
+    <link rel="stylesheet" href="styles-demo.css">
     <title>Demo</title>
 </head>
 <body>
@@ -60,8 +59,8 @@ const manager = () => {
     employeesArr.push(manager);
     switch(answers.moreRoles) {
       case 'Yes':
-        makeMCard()
-        findRole()
+        makeMCard();
+        findRole();
         break;
       case 'No':
       default:
@@ -128,11 +127,12 @@ const engineer = () => {
     employeesArr.push(engineer)
     switch(answers.moreRoles) {
       case 'Yes':
-        findRole()
+        makeECard();
+        findRole();
         break;
       default:
         makeECard();
-        generateHTML()
+        generateHTML();
     }
   })
 }
@@ -171,12 +171,13 @@ const intern = () => {
     employeesArr.push(intern)
     switch(answers.moreRoles) {
       case 'Yes':
-        findRole()
+        makeICard();
+        findRole();
         break;
       case 'No':
       default:
-        makeICard()
-        generateHTML()
+        makeICard();
+        generateHTML();
     }
   })
 }
@@ -193,8 +194,8 @@ const eCard = (name, id, email, gitHub, role) => {
         <div class="card-body employee-card-body">
             <div class="employee-details container">
                 <p class="card-text detail-text employee-id">ID: ${id}</p>
-                <p class="card-text detail-text employee-email">Email: ${email}</p>
-                <a href="https://github.com/${gitHub}"><p class="card-text detail-text employee-github">GitHub: ${gitHub}</p></a>
+               <p class="card-text detail-text employee-email">Email:  <a href="mailto:${email}">${email}</a></p>
+                <p class="card-text detail-text employee-github">GitHub: <a href="https://github.com/${gitHub}" target="_">${gitHub}</a></p>
             </div>
         </div>
     </div>
@@ -215,7 +216,7 @@ const iCard = (name, id, email, school, role) => {
         <div class="card-body employee-card-body">
             <div class="employee-details container">
                 <p class="card-text detail-text employee-id">ID: ${id}</p>
-                <p class="card-text detail-text employee-email">Email: ${email}</p>
+               <p class="card-text detail-text employee-email">Email:  <a href="mailto:${email}">${email}</p></a>
                 <p class="card-text detail-text employee-github">School: ${school}</p>
             </div>
         </div>
@@ -237,7 +238,7 @@ const mCard = (name, id, email, officeNumber, role) => {
         <div class="card-body employee-card-body">
             <div class="employee-details container">
                 <p class="card-text detail-text employee-id">ID: ${id}</p>
-                <p class="card-text detail-text employee-email">Email: ${email}</p>
+                <p class="card-text detail-text employee-email">Email: <a href="mailto:${email}">${email}</a></p>
                 <p class="card-text detail-text employee-officeNumber">Office Number: ${officeNumber}</p>
             </div>
         </div>
@@ -266,10 +267,10 @@ const makeECard = () => {
       engineerArr[i].getEmail(),
       // .gitHub() doesn't work, refactor later.
       // engineerArr[i].gitHub(),
-      engineerArr[i].gitHub,
+      engineerArr[i].getGitHub(),
       engineerArr[i].getRole()
     );
-    console.log(engineerArr[i].gitHub)
+    // console.log(engineerArr[i].gitHub)
   }
   
   //   for (let i = 0; i < employeesArr.length; i++) {
@@ -297,10 +298,10 @@ const makeICard = () => {
       internArr[i].getEmail(),
       // .school() doesn't work, refactor later.
       // internArr[i].school(),
-      internArr[i].school,
+      internArr[i].getSchool(),
       internArr[i].getRole()
     );
-    console.log(internArr[i].school)
+    // console.log(internArr[i].school)
   }
 
   //   for (let i = 0; i < employeesArr.length; i++) {
@@ -320,7 +321,7 @@ const makeICard = () => {
 
 // Make manager card
 const makeMCard = () => {
-  console.log(employeesArr)
+  // console.log(employeesArr)
   let managerArr = employeesArr.filter(employee => employee.getRole() === 'Manager')
   for (let i = 0; i < managerArr.length; i++) {
     mCard(
@@ -329,12 +330,11 @@ const makeMCard = () => {
       managerArr[i].getEmail(),
       // .officeNumber() doesn't work, refactor later.
       // managerArr[i].officeNumber(),
-      managerArr[i].officeNumber,
+      managerArr[i].getOfficeNumber(),
       managerArr[i].getRole()
     );
-    console.log(managerArr[i].officeNumber)
+    // console.log(managerArr[i].officeNumber)
   }
-
   //   for (let i = 0; i < employeesArr.length; i++) {
   //     // console.log(employeesArr)
   //     // console.log(employeesArr[i].getName()); 
@@ -356,5 +356,5 @@ const generateHTML = () => {
   </body>
   </html>
   `)
-  fs.writeFileSync("index.HTML", HTML.join(''))
+  fs.writeFileSync("src/index.HTML", HTML.join(''))
 }
