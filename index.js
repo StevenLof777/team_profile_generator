@@ -211,7 +211,7 @@ const iCard = (name, id, email, school, role) => {
     <div class="card employee-card">
     <div class="employee-header">
         <h5 class="card-title employee-name">${name}</h5>
-        <h5 class="card-title job-title"><i class="fas fas fa-glasses my-icons"></i> ${role}</h5>
+        <h5 class="card-title job-title"><i class="fas fa-user-graduate my-icons"></i> ${role}</h5>
     </div>
         <div class="card-body employee-card-body">
             <div class="employee-details container">
@@ -248,15 +248,6 @@ const mCard = (name, id, email, officeNumber, role) => {
   // console.log(HTML);
 };
 
-// Testing out getGitHub() on a filtered engineer
-// const filterEngineer = () => {
-//   let engineerArr = employeesArr.filter(employee => employee.getRole() === 'Engineer')
-//   for (let i = 0; i < engineerArr.length; i++) {
-
-//     console.log(engineerArr[i].gitHub)
-//   }
-// }
-
 // Make engineer card
 const makeECard = () => {
   let engineerArr = employeesArr.filter(employee => employee.getRole() === 'Engineer')
@@ -272,20 +263,6 @@ const makeECard = () => {
     );
     // console.log(engineerArr[i].gitHub)
   }
-  
-  //   for (let i = 0; i < employeesArr.length; i++) {
-  //     // console.log(employeesArr)
-  //     // console.log(employeesArr[i]); 
-  //     eCard(
-  //       employeesArr[i].getName(),
-  //       employeesArr[i].getId(),
-  //       employeesArr[i].getEmail(),
-  //       // .gitHub() doesn't work, refactor later.
-  //       // employeesArr[i].gitHub(),
-  //       employeesArr[i].gitHub,
-  //       employeesArr[i].getRole()
-  //     );
-  // }
 }
 
 // Make intern card
@@ -303,20 +280,6 @@ const makeICard = () => {
     );
     // console.log(internArr[i].school)
   }
-
-  //   for (let i = 0; i < employeesArr.length; i++) {
-  //     // console.log(employeesArr[i])
-  //     // console.log(employeesArr[i].getEmail()); 
-  //     iCard(
-  //       employeesArr[i].getName(),
-  //       employeesArr[i].getId(),
-  //       employeesArr[i].getEmail(),
-  //       // .getSchool() Does not work, refactor later.
-  //       // employeesArr[i].getSchool(),
-  //       employeesArr[i].school,
-  //       employeesArr[i].getRole()
-  //     );
-  // }
 }
 
 // Make manager card
@@ -335,17 +298,6 @@ const makeMCard = () => {
     );
     // console.log(managerArr[i].officeNumber)
   }
-  //   for (let i = 0; i < employeesArr.length; i++) {
-  //     // console.log(employeesArr)
-  //     // console.log(employeesArr[i].getName()); 
-  //     mCard(
-  //       employeesArr[i].getName(),
-  //       employeesArr[i].getId(),
-  //       employeesArr[i].getEmail(),
-  //       employeesArr[i].getOfficeNumber(),
-  //       employeesArr[i].getRole()
-  //     );
-  // }
 }
 
 // Generate HTML
